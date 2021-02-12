@@ -1,21 +1,17 @@
 package SeleniumGradle.pages;
 
+import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import net.thucydides.core.annotations.DefaultUrl;
+import org.openqa.selenium.support.FindBy;
 
+@DefaultUrl("page:webdriver.base.url")
+public class ChoucairHomePage extends PageObject {
 
-public class ChoucairHomePage {
-
-   WebDriver driver;
-
-    By linkJob = By.xpath("//a[contains(text(), 'Empleos')]");
-
-    public ChoucairHomePage(WebDriver driver){
-        this.driver = driver;
-    }
+    @FindBy(xpath = "//a[contains(text(), 'Empleos')]")
+    WebElementFacade linkEmpleos;
 
     public void clickJobLink(){
-        driver.findElement(linkJob).click();
+        linkEmpleos.click();
     }
 }

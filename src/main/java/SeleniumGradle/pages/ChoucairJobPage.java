@@ -1,62 +1,57 @@
 package SeleniumGradle.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class ChoucairJobPage {
+public class ChoucairJobPage extends PageObject {
 
-    WebDriver driver;
+    //@FindBy (xpath = "//a[contains(text(), 'Qué es ser Choucair')]")
+    @FindBy (xpath = "//img[contains(@src, 'trabajo-1')]")
+    WebElementFacade linkCho;
 
-    //Qué es ser choucair
-    By linktextCho = By.xpath("//a[contains(text(), '¿Qué es ser Choucair?')]");
+    @FindBy (xpath = "//a[contains(text(), 'Convocatorias')]")
+    WebElementFacade linkTextCon;
 
-    //Convocatorias
-    By linktextCon = By.xpath("//a[contains(text(), 'Convocatorias')]");
+    @FindBy (xpath = "//a[contains(text(), 'Prepararse para aplicar')]")
+    WebElementFacade linkTextPrep;
 
-    //Preparese para aplicar
-    By linktextPrep = By.xpath("//a[contains(text(), 'Prepararse para aplicar')]");
+    @FindBy (id = "search_keywords")
+    WebElementFacade txtKeyWords;
 
-    // Filtro por palabra clave
-    By txtKeyWords = By.id("search_keywords");
+    @FindBy (id = "search_location")
+    WebElementFacade txtCiudad;
 
-    // Filtro por ciudad
-    By txtCiudad = By.id("search_location");
+    @FindBy (xpath = "//input[contains(@type, 'submit')]")
+    WebElementFacade btnSubmit;
 
-    // Filtro por ciudad
-    By btnSubmit = By.xpath("//input[contains(@type, 'submit')]");
+    @FindBy (xpath = "//*[contains(text(), 'Analista de Pruebas Medellín y Bogotá')]")
+    WebElementFacade linkTextVa;
 
-    //seleccionar una vacante
-    By linktextVa = By.xpath("//*[contains(text(), 'Analista de Pruebas Medellín y Bogotá')]");
 
-    public ChoucairJobPage (WebDriver driver){
-        this.driver = driver;
+
+    public void queEsSerChoucair (){
+        waitFor(ExpectedConditions.visibilityOf(linkCho));
+        linkCho.click();
     }
 
-    public void clickQueEsSerChoucair (){
-        driver.findElement(linktextCho).click();
+    public void convocatorias (){
+       linkTextCon.click();
     }
 
-    public void clickConvocatorias (){
-        driver.findElement(linktextCon).click();
+    public void prepareseParaAplicar (){
+        linkTextPrep.click();
     }
 
-    public void clickPreparese (){
-        driver.findElement(linktextPrep).click();
+    public void filtarEmpleoYCiudad (String keyWords, String ciudad){
+        txtKeyWords.sendKeys(keyWords);
+        txtCiudad.sendKeys(ciudad);
+        btnSubmit.click();
     }
 
-    public void setKeyWords (String strKeyWords){
-        driver.findElement(txtKeyWords).sendKeys(strKeyWords);
-    }
-
-    public void setCiudad (String strCiudad){
-        driver.findElement(txtCiudad).sendKeys(strCiudad);
-    }
-
-    public void clickOnSubmitButton(){
-        driver.findElement(btnSubmit).click();
-    }
     public void selectVacante(){
-        driver.findElement(linktextVa).click();
+        linkTextVa.click();
     }
 
 }
